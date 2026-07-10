@@ -1,5 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
+from .lms_sync_views import LmsMembershipSyncView
 from .views import (
     FirebaseLoginView,
     UserProfileView,
@@ -268,4 +269,7 @@ urlpatterns += [
     path('placement-test/questions/', PlacementTestQuestionsView.as_view(), name='placement-test-questions'),
     path('placement-test/submit/', PlacementTestSubmitView.as_view(), name='placement-test-submit'),
     path('admin/placement-test-results/', AdminPlacementTestResultsView.as_view(), name='admin-placement-test-results'),
+
+    # Cross-platform sync: LMS -> IELTS student membership (X-API-Key; see SSO_SYNC_DESIGN.md §10)
+    path('lms/students/membership', LmsMembershipSyncView.as_view(), name='lms-membership-sync'),
 ]
